@@ -57,7 +57,7 @@ Password: {people.password}""")
     print(f"\n{len(students)} Students.")
 
 
-# generates 25 student obj.
+# generates 5 student obj.
 for _ in range(5):
     add_student()
 
