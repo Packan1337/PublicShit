@@ -83,8 +83,14 @@ def display_all_bank_users():
 BankID: {users.bank_id}
 """)
 
+def generate_users():
+    all_bank_users.append(BankUser(fake.first_name(), fake.last_name(), fake.swift(), Car("Mercedes-Benz", "S580", 2022, 5000)))
 
-create_bank_user()
+for _ in range(25):
+    generate_users()
+
+
+#create_bank_user()
 
 
 display_all_bank_users()
