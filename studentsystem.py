@@ -1,10 +1,12 @@
 from faker import Faker
 import random
+from enum import Enum, auto
+
 
 # TODO RANDOM STUDENT_ID
 
 # global variables
-fake = Faker("sv_SE")
+fake = Faker()
 students = []
 passwords = {}
 
@@ -44,6 +46,10 @@ def remove_student(student_index):
     students.remove(student_index)
 
 
+# def student_ssn_validation(student_index):
+    # if student_index.ssn
+
+
 # function that prints students list.
 def show_all_students():
     for people in students:
@@ -60,6 +66,8 @@ Password: {people.password}""")
 # generates 5 student obj.
 for _ in range(5):
     add_student()
+
+show_all_students()
 
 
 
