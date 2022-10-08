@@ -135,7 +135,7 @@ def display_all_bank_users():
 
 
 # function that generates a fake user for testing purposes.
-def generate_fake_users():
+def generate_fake_user():
     # variable that decides if fake user's assets
     random_pick = random.randint(1, 3)
 
@@ -172,8 +172,8 @@ def generate_fake_users():
 
 
 # generate multiple fake users.
-for _ in range(100000):
-    generate_fake_users()
+for _ in range(100):
+    generate_fake_user()
 
 
 display_all_bank_users()
