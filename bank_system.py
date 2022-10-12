@@ -45,24 +45,37 @@ class House:
 
 # bank user class.
 class BankUser:
-    def __init__(self, first_name: str, last_name: str, bank_id: str, car=None, house=None):
+    def __init__(self, first_name: str, last_name: str, bank_id: str, user_credits: float, car=None, house=None):
         self.user_cars = []
         self.user_houses = []
 
         self.first_name = first_name
         self.last_name = last_name
         self.bank_id = bank_id
+        self.user_credits = user_credits
         self.car = car
         self.house = house
 
         self.user_cars.append(car)
         self.user_houses.append(house)
 
+    # payment method.
+    def user_payment(self, amout_to_pay: int or float):
+        self.user_credits -= amout_to_pay
+        print(f"{self.first_name} {self.last_name} has payed ${amout_to_pay}.")
+        print(f"${self.user_credits} in account.")
+
+    # method to add credits to user's account.
+    def user_add_credits(self, amout_to_add: int or float):
+        self.user_credits += amout_to_add
+        print(f"{self.first_name} {self.last_name} has recieved ${amout_to_add}.")
+        print(f"${self.user_credits} in account.")
+
     # method to get name of car.
     @staticmethod
     def display_car(car_to_display):
         car = car_to_display
-        return f"{car.car}"
+        return f"{car.model_year} {car.car}"
 
     @staticmethod
     def display_house(house_to_display):
@@ -78,7 +91,7 @@ class BankUser:
             print(f"""
 {bank_user.first_name} {bank_user.last_name}
 BankID: {bank_user.bank_id}
-Assets
+Credits: ${bank_user.user_credits}
 Cars: {bank_user.display_car(bank_user.user_cars[0])}
 House(s): {bank_user.display_house(bank_user.user_houses[0])}
 """)
@@ -88,7 +101,7 @@ House(s): {bank_user.display_house(bank_user.user_houses[0])}
             print(f"""
 {bank_user.first_name} {bank_user.last_name}
 BankID: {bank_user.bank_id}
-Assets
+Credits: ${bank_user.user_credits}
 Cars: {bank_user.display_car(bank_user.user_cars[0])}
 """)
 
@@ -97,7 +110,7 @@ Cars: {bank_user.display_car(bank_user.user_cars[0])}
             print(f"""
 {bank_user.first_name} {bank_user.last_name}
 BankID: {bank_user.bank_id}
-Assets
+Credits: ${bank_user.user_credits}
 House(s): {bank_user.display_house(bank_user.user_houses[0])}
 """)
 
@@ -125,7 +138,11 @@ def create_bank_user():
                                  int(input("House m2: ")))
 
     # obligatory user input data.
-    all_bank_users.append(BankUser(input("Enter first name: "), input("Enter last name: "), fake.swift(), asset_to_add))
+    all_bank_users.append(BankUser(input("Enter first name: "),
+                                   input("Enter last name: "),
+                                   fake.swift(),
+                                   0,
+                                   asset_to_add))
 
 
 # function that displays all bank users.
@@ -144,8 +161,9 @@ def generate_fake_user():
         all_bank_users.append(BankUser(fake.first_name(),
                                        fake.last_name(),
                                        fake.swift(),
+                                       random.randrange(1000, 100000),
                                        Car(random.choice(dummy_cars),
-                                           2022,
+                                           random.randrange(2000, 2022),
                                            5000)))
 
     elif random_pick == 2:
@@ -153,6 +171,7 @@ def generate_fake_user():
         all_bank_users.append(BankUser(fake.first_name(),
                                        fake.last_name(),
                                        fake.swift(),
+                                       random.randrange(1000, 100000),
                                        None,
                                        House(random.choice(dummy_houses),
                                              random.choice(dummy_areas),
@@ -163,8 +182,9 @@ def generate_fake_user():
         all_bank_users.append(BankUser(fake.first_name(),
                                        fake.last_name(),
                                        fake.swift(),
+                                       random.randrange(1000, 100000),
                                        Car(random.choice(dummy_cars),
-                                           2022,
+                                           random.randrange(2000, 2022),
                                            5000),
                                        House(random.choice(dummy_houses),
                                              random.choice(dummy_areas),
